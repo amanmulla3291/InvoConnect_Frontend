@@ -1,0 +1,104 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  body {
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Container Styling */
+  .register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    max-width: 450px; /* Set a maximum width for responsiveness */
+  }
+  
+  .register-form-wrapper {
+    background: rgba(255, 255, 255, 0.15); /* Transparent white */
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Border for contrast */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: #fff;
+  }
+  
+  .register-form-wrapper h2 {
+    font-size: 25px;
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  
+  .register-form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #fff;
+  }
+  
+  .register-form input {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    padding: 10px;
+    width: 100%;
+  }
+  
+  .register-form input:focus {
+    outline: none;
+    border-color: #ff758c;
+  }
+  
+  .error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
+  .register-form button {
+    background: linear-gradient(45deg, #ff0d45, #ff01eb);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 20px;
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  /* Media Query for Smaller Screens */
+  @media (max-width: 600px) {
+    .register-container {
+      padding: 20px;
+    }
+  
+    .register-form-wrapper {
+      padding: 30px;
+    }
+  
+    .register-form-wrapper h2 {
+      font-size: 20px;
+    }
+  }
