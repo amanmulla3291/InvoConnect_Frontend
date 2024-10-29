@@ -1,6 +1,6 @@
 # React + Vite
 
-``` Markdown
+```markdown
 InvoConnect/
 ├── public/
 │   └── vite.svg

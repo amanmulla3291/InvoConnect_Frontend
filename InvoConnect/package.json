@@ -10,6 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@patternfly/react-core": "^6.0.0",
+    "@patternfly/react-icons": "^6.0.0",
+    "@patternfly/react-styles": "^6.0.0",
+    "@patternfly/react-tokens": "^6.0.0",
     "@reduxjs/toolkit": "^2.3.0",
     "jspdf": "^2.5.2",
     "react": "^18.3.1",
