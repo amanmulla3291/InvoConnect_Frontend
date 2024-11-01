@@ -1,24 +1,71 @@
-// src/App.jsx
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { useRef } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
-import Register from './components/Auth/Register';
+import { ThemeProvider } from './context/ThemeContext';
+import { Toaster, Position } from '@blueprintjs/core';
+import ProtectedRoute from './components/ProtectedRoute';
+import ErrorBoundary from './components/ErrorBoundary';
+
+// Import components
 import Login from './components/Auth/Login';
-import BusinessOwnerDashboard from './components/Dashboard/BusinessOwnerDashboard';
+import Register from './components/Auth/Register';
 import AdminDashboard from './components/Dashboard/AdminDashboard';
+import BusinessOwnerDashboard from './components/Dashboard/BusinessOwnerDashboard';
+import NotFound from './components/NotFound';
+
+// Import Blueprint core CSS
+import '@blueprintjs/core/lib/css/blueprint.css';
+import './index.css';
+
+// Create the Toaster instance outside the component
+const toaster = Toaster.create({
+  position: Position.TOP,
+});
 
 const App = () => {
+  const toasterRef = useRef(toaster);
+
   return (
-    <AuthProvider>
+    <ThemeProvider>
       <Router>
-        <Routes>
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<BusinessOwnerDashboard />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-        </Routes>
+        <AuthProvider>
+          <ErrorBoundary>
+            {/* Toaster for displaying notifications */}
+            {/* The Toaster instance is created outside the component */}
+            
+            <Routes>
+              {/* Public Routes */}
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+
+              {/* Protected Routes */}
+              <Route 
+                path="/admin/dashboard" 
+                element={
+                  <ProtectedRoute allowedRoles={['admin']}>
+                    <AdminDashboard />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/business/dashboard" 
+                element={
+                  <ProtectedRoute allowedRoles={['business_owner']}>
+                    <BusinessOwnerDashboard />
+                  </ProtectedRoute>
+                } 
+              />
+
+              {/* Redirect to login on root path */}
+              <Route path="/" element={<Navigate to="/login" replace />} />
+
+              {/* 404 Route */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </ErrorBoundary>
+        </AuthProvider>
       </Router>
-    </AuthProvider>
+    </ThemeProvider>
   );
 };
 

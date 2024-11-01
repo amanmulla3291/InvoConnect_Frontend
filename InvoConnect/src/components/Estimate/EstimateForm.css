@@ -1,0 +1,49 @@
+.estimate-form-container {
+  padding: 20px;
+  background-color: #f7f8fa; /* Light background for contrast */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bp3-form-group {
+  margin-bottom: 20px; /* Space between form groups */
+}
+
+.estimate-list {
+  margin-top: 20px;
+  background-color: #ffffff; /* White background for estimate summary */
+  padding: 15px;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.bp3-html-table {
+  width: 100%;
+  margin-top: 10px;
+  border-collapse: collapse; /* Ensure borders are collapsed */
+}
+
+.bp3-html-table th, 
+.bp3-html-table td {
+  padding: 10px;
+  text-align: left; /* Left align text */
+}
+
+.bp3-html-table th {
+  background-color: #e6f7ff; /* Light blue header background */
+  border-bottom: 2px solid #0074d9; /* Blue bottom border */
+}
+
+.bp3-html-table td {
+  border-bottom: 1px solid #e0e0e0; /* Light gray border for table rows */
+}
+
+.bp3-html-table-striped tbody tr:nth-child(even) {
+  background-color: #f9f9f9; /* Alternate row color */
+}
+
+@media (max-width: 600px) {
+  .estimate-form-container {
+    padding: 15px; /* Reduce padding on small screens */
+  }
+}

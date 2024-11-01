@@ -1,3 +1,4 @@
+/* Global Styles */
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -11,13 +12,16 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+/* Animation */
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -33,10 +37,52 @@
   }
 }
 
+/* Card Styles */
 .card {
   padding: 2em;
+  background-color: #fff; /* Ensure the background contrasts with the main background */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition for hover effect */
+}
+
+.card:hover {
+  transform: translateY(-2px); /* Lift effect on hover */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  #root {
+    padding: 1rem; /* Less padding on small screens */
+  }
+
+  .card {
+    padding: 1.5em; /* Reduced padding inside cards */
+    width: 100%; /* Full width cards */
+    margin: 1em 0; /* Add margin between cards */
+  }
+}
+
+/* Button and Interactive Element Styles */
+.button, .card {
+  transition: background-color 0.2s, color 0.2s; /* Smooth transition for buttons and cards */
+}
+
+.button:hover, .card:hover {
+  background-color: #f5f5f5; /* Subtle background change */
+  color: #007bff; /* Change text color */
+}
+
+/* Accessibility */
+body {
+  color: #333; /* Darker text color for readability */
+}
+
+.card h4 {
+  color: #222; /* Darker heading color */
 }
 
 .read-the-docs {
-  color: #888;
+  color: #888; /* Adjusted color for better visibility */
 }

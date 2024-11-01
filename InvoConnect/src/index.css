@@ -1,16 +1,219 @@
-/* src/index.css */
-body {
-  font-family: 'RedHat', sans-serif;
+/* Global Styles with Cockpit-inspired theming */
+:root {
+  /* Light Mode Color Palette */
+  --pf-global--BackgroundColor--100: #f0f0f0;
+  --pf-global--BackgroundColor--200: #ffffff;
+  --pf-global--Color--100: #151515;
+  --pf-global--Color--200: #4f5255;
+  --pf-global--primary-color--100: #0066cc;
+  --pf-global--secondary-color--100: #8a8d90;
+  
+  /* Dark Mode Color Palette */
+  --pf-global--dark-theme--BackgroundColor--100: #0c0c0c;
+  --pf-global--dark-theme--BackgroundColor--200: #1a1a1a;
+  --pf-global--dark-theme--Color--100: #f0f0f0;
+  --pf-global--dark-theme--Color--200: #a3a3a3;
+  --pf-global--dark-theme--primary-color--100: #2684ff;
+  
+  /* Transition Variables */
+  --pf-global--transition-speed--base: 0.2s;
+  --pf-global--transition-timing--base: ease-in-out;
 }
 
-button {
-  padding: 10px 20px;
-  margin: 10px;
-  border: none;
-  cursor: pointer;
+/* Base Styles */
+html {
+  box-sizing: border-box;
   font-size: 16px;
+  scroll-behavior: smooth;
 }
 
-button:hover {
-  opacity: 0.8;
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  font-family: 'Red Hat Text', 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.5;
+  background-color: var(--pf-global--BackgroundColor--100);
+  color: var(--pf-global--Color--100);
+  transition: 
+    background-color var(--pf-global--transition-speed--base) var(--pf-global--transition-timing--base),
+    color var(--pf-global--transition-speed--base) var(--pf-global--transition-timing--base);
+}
+
+/* Dark Mode Styles */
+body.pf-theme-dark {
+  background-color: var(--pf-global--dark-theme--BackgroundColor--100);
+  color: var(--pf-global--dark-theme--Color--100);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--pf-global--BackgroundColor--200);
+  transition: background var(--pf-global--transition-speed--base);
+}
+
+.pf-theme-dark ::-webkit-scrollbar-track {
+  background: var(--pf-global--dark-theme--BackgroundColor--200);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--pf-global--primary-color--100);
+  border-radius: 5px;
+  transition: background var(--pf-global--transition-speed--base);
+}
+
+.pf-theme-dark ::-webkit-scrollbar-thumb {
+  background: var(--pf-global--dark-theme--primary-color--100);
+}
+
+/* Responsive Typography */
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+/* Form Inputs */
+.pf-c-form-control {
+  background-color: var(--pf-global--BackgroundColor--200);
+  color: var(--pf-global--Color--100);
+  border-color: var(--pf-global--secondary-color--100);
+  transition: 
+    background-color var(--pf-global--transition-speed--base),
+    border-color var(--pf-global--transition-speed--base),
+    box-shadow var(--pf-global--transition-speed--base);
+}
+
+.pf-theme-dark .pf-c-form-control {
+  background-color: var(--pf-global--dark-theme--BackgroundColor--200);
+  color: var(--pf-global--dark-theme--Color--100);
+  border-color: var(--pf-global--secondary-color--100);
+}
+
+.pf-c-form-control:focus {
+  box-shadow: 0 0 0 2px var(--pf-global--primary-color--100);
+  border-color: var(--pf-global--primary-color--100);
+}
+
+.pf-theme-dark .pf-c-form-control:focus {
+  box-shadow: 0 0 0 2px var(--pf-global--dark-theme--primary-color--100);
+  border-color: var(--pf-global--dark-theme--primary-color--100);
+}
+
+/* Button Styles */
+.pf-c-button {
+  transition: 
+    background-color var(--pf-global--transition-speed--base),
+    color var(--pf-global--transition-speed--base),
+    border-color var(--pf-global--transition-speed--base);
+}
+
+/* Table Styles */
+.pf-c-table {
+  background-color: var(--pf-global--BackgroundColor--200);
+  color: var(--pf-global--Color--100);
+}
+
+.pf-theme-dark .pf-c-table {
+  background-color: var(--pf-global--dark-theme--BackgroundColor--200);
+  color: var(--pf-global--dark-theme--Color--100);
+}
+
+/* Modal Styles */
+.pf-c-modal-box {
+  background-color: var(--pf-global--BackgroundColor--200);
+  color: var(--pf-global--Color--100);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.pf-theme-dark .pf-c-modal-box {
+  background-color: var(--pf-global--dark-theme--BackgroundColor--200);
+  color: var(--pf-global--dark-theme--Color--100);
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+}
+
+/* Accessibility and Focus States */
+*:focus {
+  outline: 2px solid var(--pf-global--primary-color--100);
+  outline-offset: 2px;
+}
+
+.pf-theme-dark *:focus {
+  outline-color: var(--pf-global--dark-theme--primary-color--100);
+}
+
+/* Utility Classes */
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 1rem; }
+.mt-4 { margin-top: 1.5rem; }
+
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+
+/* Responsive Utilities */
+@media screen and (max-width: 768px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+/* Print Styles */
+@media print {
+  body {
+    background-color: white;
+    color: black;
+  }
+}
+
+/* BluePrintJS */
+.bp3-card-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+/* Card Styling Improvements */
+.card {
+  background: var(--pf-global--BackgroundColor--200);
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 2em;
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Consistent Hover Effects */
+.pf-c-button:hover {
+  background-color: var(--pf-global--primary-color--100);
+}
+
+/* Accessibility Colors */
+:root {
+  --pf-global--Color--contrast: #ffffff;
+}
+
+/* Text Color Contrast */
+body {
+  color: var(--pf-global--Color--100);
+}
+
+/* Print Styles for Improved Readability */
+@media print {
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 }

@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "@patternfly/react-core": "^6.0.0",
+    "@patternfly/react-icons": "^6.0.0",
     "react-router-dom": "^6.27.0"
   }
 }

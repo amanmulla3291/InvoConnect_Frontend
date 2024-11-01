@@ -1,59 +1,94 @@
-// src/components/Auth/Login.jsx
 import React, { useState, useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext';
 import {
   Button,
-  Form,
+  Card,
+  Elevation,
   FormGroup,
-  TextInput,
-  Page,
-  PageSection,
-  PageSectionVariants,
-  Title
-} from '@patternfly/react-core';
+  InputGroup,
+  H1,
+  Callout
+} from '@blueprintjs/core';
+import { AuthContext } from '../../context/AuthContext';
+import ThemeToggle from '../ThemeToggle';
 
 const Login = () => {
   const { login } = useContext(AuthContext);
   const [formData, setFormData] = useState({ username: '', password: '' });
+  const [error, setError] = useState(null);
 
-  const handleChange = (value, event) => {
-    setFormData({ ...formData, [event.target.name]: value });
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+
+    // Clear error when user starts typing
+    if (error) {
+      setError(null);
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    login(formData);
+    try {
+      await login(formData);
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
-    <Page>
-      <PageSection variant={PageSectionVariants.light}>
-        <Title headingLevel="h1">Login</Title>
-        <Form onSubmit={handleSubmit}>
-          <FormGroup label="Username" isRequired fieldId="username">
-            <TextInput
-              isRequired
-              type="text"
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+        padding: '20px'
+      }}
+    >
+      <Card elevation={Elevation.TWO} style={{ maxWidth: '400px', width: '100%' }}>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '10px' }}>
+          <ThemeToggle />
+        </div>
+        <H1 style={{ textAlign: 'center', margin: '20px 0' }}>Login</H1>
+        {error && (
+          <Callout intent="danger" style={{ marginBottom: '20px' }}>
+            {error}
+          </Callout>
+        )}
+        <form onSubmit={handleSubmit} style={{ padding: '0 20px' }}>
+          <FormGroup label="Username" labelFor="username" labelInfo="(required)">
+            <InputGroup
               id="username"
               name="username"
+              placeholder="Enter username"
               value={formData.username}
               onChange={handleChange}
+              required
             />
           </FormGroup>
-          <FormGroup label="Password" isRequired fieldId="password">
-            <TextInput
-              isRequired
-              type="password"
+          <FormGroup label="Password" labelFor="password" labelInfo="(required)">
+            <InputGroup
               id="password"
               name="password"
+              placeholder="Enter password"
+              type="password"
               value={formData.password}
               onChange={handleChange}
+              required
             />
           </FormGroup>
-          <Button type="submit">Login</Button>
-        </Form>
-      </PageSection>
-    </Page>
+          <Button
+            type="submit"
+            intent="primary"
+            large
+            fill
+            style={{ marginTop: '20px' }}
+          >
+            Login
+          </Button>
+        </form>
+      </Card>
+    </div>
   );
 };
 

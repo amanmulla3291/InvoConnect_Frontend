@@ -1,0 +1,13 @@
+.theme-toggle {
+    margin-left: 10px; /* Adds space between the toggle and other elements */
+  }
+  
+  .theme-toggle .bp3-button {
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Optional: Add hover effects for better UX */
+  .theme-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Light hover effect for dark mode */
+  }
+  
