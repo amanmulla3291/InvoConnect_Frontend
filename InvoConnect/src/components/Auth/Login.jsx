@@ -64,6 +64,7 @@ const Login = () => {
               value={formData.username}
               onChange={handleChange}
               required
+              autoComplete="username"
             />
           </FormGroup>
           <FormGroup label="Password" labelFor="password" labelInfo="(required)">
@@ -75,6 +76,7 @@ const Login = () => {
               value={formData.password}
               onChange={handleChange}
               required
+              autoComplete="current-password"
             />
           </FormGroup>
           <Button
