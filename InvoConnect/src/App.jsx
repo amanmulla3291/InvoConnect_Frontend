@@ -6,6 +6,7 @@ import { Toaster, Position } from '@blueprintjs/core';
 import ProtectedRoute from './components/ProtectedRoute';
 import ErrorBoundary from './components/ErrorBoundary';
 
+
 // Import components
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
