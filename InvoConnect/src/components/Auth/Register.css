@@ -1,0 +1,42 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.register-card {
+  width: 400px;
+  padding: 20px;
+}
+
+.theme-toggle-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.register-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.bp3-select {
+  width: 100%;
+}
+
+.bp3-select select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+}
+
+.bp3-callout {
+  margin-top: 10px;
+}

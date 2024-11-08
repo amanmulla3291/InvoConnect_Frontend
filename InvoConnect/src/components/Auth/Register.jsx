@@ -1,4 +1,3 @@
-// src/components/Auth/Register.jsx
 import React, { useState, useContext } from 'react';
 import {
   Button,
@@ -9,38 +8,43 @@ import {
   H1,
   Callout
 } from '@blueprintjs/core';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import ThemeToggle from '../ThemeToggle';
+import './Register.css';
 
 const Register = () => {
   const { register } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     username: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    role: ''
   });
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const validateForm = () => {
     const newErrors = {};
 
-    // Username validation
     if (!formData.username) {
       newErrors.username = 'Username is required';
     } else if (formData.username.length < 3) {
       newErrors.username = 'Username must be at least 3 characters long';
     }
 
-    // Password validation
     if (!formData.password) {
       newErrors.password = 'Password is required';
     } else if (formData.password.length < 8) {
       newErrors.password = 'Password must be at least 8 characters long';
     }
 
-    // Confirm password validation
     if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = 'Passwords do not match';
+    }
+
+    if (!formData.role) {
+      newErrors.role = 'Role is required';
     }
 
     setErrors(newErrors);
@@ -51,7 +55,6 @@ const Register = () => {
     const { name, value } = event.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    // Clear specific error when user starts typing
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
@@ -62,36 +65,36 @@ const Register = () => {
 
     if (validateForm()) {
       try {
-        // Generate unique 4-digit UID
         const uid = Math.floor(1000 + Math.random() * 9000);
 
-        // Only pass username and uid to register function
         await register({
           username: formData.username,
-          uid
+          uid,
+          role: formData.role
         });
+
+        localStorage.setItem('userRole', formData.role);
+        console.log('Role saved to localStorage:', localStorage.getItem('userRole'));
+
+        navigate('/login');
       } catch (error) {
-        setErrors({ submit: error.message });
+        if (error.message.includes('Username already exists')) {
+          navigate('/login');
+        } else {
+          setErrors({ submit: error.message });
+        }
       }
     }
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '100vh',
-        padding: '20px'
-      }}
-    >
-      <Card elevation={Elevation.TWO} style={{ maxWidth: '400px', width: '100%' }}>
-        <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '10px' }}>
+    <div className="register-container">
+      <Card elevation={Elevation.TWO} className="register-card">
+        <div className="theme-toggle-container">
           <ThemeToggle />
         </div>
-        <H1 style={{ textAlign: 'center', margin: '20px 0' }}>Register</H1>
-        <form onSubmit={handleSubmit} style={{ padding: '0 20px' }}>
+        <H1 className="register-title">Register</H1>
+        <form onSubmit={handleSubmit} className="register-form">
           <FormGroup
             label="Username"
             labelFor="username"
@@ -109,6 +112,7 @@ const Register = () => {
               value={formData.username}
               onChange={handleChange}
               required
+              autoComplete="username"
             />
           </FormGroup>
           <FormGroup
@@ -129,6 +133,7 @@ const Register = () => {
               value={formData.password}
               onChange={handleChange}
               required
+              autoComplete="new-password"
             />
           </FormGroup>
           <FormGroup
@@ -149,22 +154,34 @@ const Register = () => {
               value={formData.confirmPassword}
               onChange={handleChange}
               required
+              autoComplete="new-password"
             />
           </FormGroup>
-          {errors.submit && (
-            <Callout intent="danger" style={{ marginTop: '10px' }}>
-              {errors.submit}
-            </Callout>
-          )}
-          <Button
-            type="submit"
-            intent="primary"
-            large
-            fill
-            style={{ marginTop: '20px' }}
+          <FormGroup
+            label="Role"
+            labelFor="role"
+            labelInfo="(required)"
+            helperText={errors.role && (
+              <Callout intent="danger" icon="error">
+                {errors.role}
+              </Callout>
+            )}
           >
-            Register
-          </Button>
+            <div className="bp3-select">
+              <select
+                id="role"
+                name="role"
+                value={formData.role}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select Role</option>
+                <option value="admin">Admin</option>
+                <option value="business_owner">Business Owner</option>
+              </select>
+            </div>
+          </FormGroup>
+          <Button type="submit" intent="primary" text="Register" />
         </form>
       </Card>
     </div>

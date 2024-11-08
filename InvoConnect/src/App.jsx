@@ -2,14 +2,14 @@ import React, { useRef } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
-import { Toaster, Position } from '@blueprintjs/core';
+import { OverlayToaster, Position } from '@blueprintjs/core';
 import ProtectedRoute from './components/ProtectedRoute';
 import ErrorBoundary from './components/ErrorBoundary';
-
 
 // Import components
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
+import ForgotPassword from './components/Auth/ForgotPassword';
 import AdminDashboard from './components/Dashboard/AdminDashboard';
 import BusinessOwnerDashboard from './components/Dashboard/BusinessOwnerDashboard';
 import NotFound from './components/NotFound';
@@ -19,7 +19,7 @@ import '@blueprintjs/core/lib/css/blueprint.css';
 import './index.css';
 
 // Create the Toaster instance outside the component
-const toaster = Toaster.create({
+const toaster = OverlayToaster.create({
   position: Position.TOP,
 });
 
@@ -38,6 +38,7 @@ const App = () => {
               {/* Public Routes */}
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
 
               {/* Protected Routes */}
               <Route 
